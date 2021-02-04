@@ -29,7 +29,7 @@ namespace Lennox.Encryption
         }
         //funciones
         //funcion cifrar
-        void cifrar()
+        void Cifrar()
         {
             TxtCifrado.Clear();
 
@@ -56,7 +56,7 @@ namespace Lennox.Encryption
 
                     x = (x / 2);
 
-                    lettertransposition = Lettertransposition(x);
+                    lettertransposition = TranspositionEncrypt(x);
 
                     exadecimal = ConverToExadecimal(lettertransposition);
 
@@ -105,7 +105,7 @@ namespace Lennox.Encryption
             //MessageBox.Show(abecedario1.Length + "\n" + abecedario2.Length);
         }
 
-        int Lettertransposition(int ascii)
+        int TranspositionEncrypt(int ascii)
         {
             //string n = "";
             //MessageBox.Show(n.Length.ToString());
@@ -171,27 +171,35 @@ namespace Lennox.Encryption
         void Descifrar() 
         {
             TxtCifrado.Clear();
-            string letter = TxtCifrado.Text;
+            string letter = TxtNormal.Text;
             string exadecimal = "";
-            int lettertransposition = 0;
-            for (int i = 0; i <= letter.Length;i++)
+            int numdecimal = 0,convertToPlainText = 0;
+            for (int i = 0; i < letter.Length;i++)
             {
                 if(letter[i] != ' ')
                 exadecimal += letter[i];
-                else
-                if(letter[i] == ' ' )
+                
+                if(letter[i] == ' ' || exadecimal.Length == letter.Length || exadecimal.Length == 2)
                 {
-                    lettertransposition = ConvertToDecimal(exadecimal);
-                    exadecimal = "";
+                    numdecimal = ConvertToDecimal(exadecimal);
+                    exadecimal = "";                    
+
+                    convertToPlainText = TranspositionDecrypt(numdecimal);
+
+                    TxtCifrado.Text += ConvertToPlainText(convertToPlainText); 
+                    //MessageBox.Show(PlainPext.ToString());
+                    //TxtCifrado += formulaDecrypt(numdecimal);
+                    //MessageBox.Show(lettertransposition.ToString());
                 }
             }
         }
 
         int ConvertToDecimal(string exadecimal)
         {
-            int elevacion = 0, numdecimal = 0, isNumber = 0;
+            int  numdecimal = 0, isNumber = 0;
+            double number = 16, elevacion = 0;
             string aux = "";
-            for (int i = exadecimal.Length; i >= 0; i--)
+            for (int i = exadecimal.Length-1; i >= 0; i--)
             {
 
                 aux = exadecimal[i].ToString();
@@ -200,42 +208,105 @@ namespace Lennox.Encryption
                     switch (aux)
                     {
                         case "A":
-                            numdecimal += 10 * (16 ^ elevacion);
+                            numdecimal += 10 * (int)Math.Pow(number, elevacion);
                             break;
                         case "B":
-                            numdecimal += 11 * (16 ^ elevacion);
+                            numdecimal += 11 * (int)Math.Pow(number, elevacion);
                             break;
                         case "C":
-                            numdecimal += 12 * (16 ^ elevacion);
+                            numdecimal += 12 * (int)Math.Pow(number, elevacion);
                             break;
                         case "D":
-                            numdecimal += 13 * (16 ^ elevacion);
+                            numdecimal += 13 * (int)Math.Pow(number, elevacion);
                             break;
                         case "E":
-                            numdecimal += 14 * (16 ^ elevacion);
+                            numdecimal += 14 * (int)Math.Pow(number, elevacion);
                             break;
                         case "F":
-                            numdecimal += 15 * (16 ^ elevacion);
+                            numdecimal += 15 * (int)Math.Pow(number, elevacion);
                             break;
                     }
                 else
                 {
-                    numdecimal += int.Parse(aux) * (16 ^ elevacion);
+                   
+                    numdecimal += int.Parse(aux) *  (int)Math.Pow(number, elevacion);
                 }
 
                 elevacion++;
             }
             return numdecimal;
         }
+        
+        int TranspositionDecrypt( int numdecimal) 
+        {
+
+            int a;
+            int resultado = 0;
+            for (int i = 0; i <= 50; i++)
+            {
+                a = abecedario2[i];
+                if (numdecimal == abecedario2[i])
+                    resultado = abecedario1[i];
+            }
+
+            //MessageBox.Show(resultado.ToString());
+            return resultado;
+        }
+
+        string ConvertToPlainText(int x) 
+        {
+            x = (x / 2) - 5;
+
+            //convierto numero ascci a caracter
+            string planintext  = "";
+            planintext += (char)x;
+
+            return planintext;
+        }
+        /// ////////////////////////////////////////////////
         /// ////////////////////////////////////////////////
         private void BtnCifrar_Click(object sender, RoutedEventArgs e)
         {
-            cifrar();
+            Cifrar();
         }
 
         private void BtnDescifrar_Click(object sender, RoutedEventArgs e)
         {
-            
+            Descifrar();   
+        }
+
+        private void TxtNormal_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            int control = 0;
+            string letter = e.Key.ToString();
+            char num = ' ';
+            if(letter.Length == 1) 
+            {
+                num = char.Parse(letter);
+                control = num;
+            }
+
+            if (letter == "Space")
+                e.Handled = false;
+            else if (letter == "Back")
+                e.Handled = false;
+            else if (control >= 65 && control <= 90)
+                e.Handled = false;
+            else
+                e.Handled = true;
+    
+        }
+
+        private void TxtNormal_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+           
+            //string letterUpper = "";
+            //letterUpper += letter;
+
+            //letter = letterUpper.ToUpper()[0];
+            //if (char.IsControl((char)e.Key))
+            //    e.Handled = false;
+
         }
     }
 }

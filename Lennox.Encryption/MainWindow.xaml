@@ -7,12 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.Foreground="{DynamicResource MaterialDesignCardBackground}"
+        
          TextElement.FontWeight="Regular"
          TextElement.FontSize="13"
          TextOptions.TextFormattingMode="Ideal"
          TextOptions.TextRenderingMode="Auto"
-         Background="{DynamicResource MaterialDesignPaper}"
+         Background="{DynamicResource MaterialDesignDarkBackground}"
          FontFamily="{DynamicResource MaterialDesignFont}"
         >
     <Grid
@@ -20,7 +21,7 @@
         >
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80"/>
+
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -29,8 +30,7 @@
         </Grid.RowDefinitions>
 
 
-        <Button 
-                Grid.Column="1"
+        <Button
                 Grid.Row="1"
                 x:Name="BtnCifrar"
                 Background="CadetBlue"
@@ -40,12 +40,11 @@
                 BorderBrush="Transparent"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="15"
-                ToolTip="Cifra el texto " Margin="86,214.6,0,0" Click="BtnCifrar_Click">
+                ToolTip="Cifra el texto " Margin="237,235.6,0,0" Click="BtnCifrar_Click">
             <TextBlock
                   Text="Cifrar" />
         </Button>
-        <Button 
-            Grid.Column="1"
+        <Button
             Grid.Row="1"
             x:Name="BtnDescifrar"
             Background="CadetBlue"
@@ -55,15 +54,14 @@
             BorderBrush="Transparent"
             Style="{StaticResource MaterialDesignRaisedDarkButton}"
             materialDesign:ButtonAssist.CornerRadius="15"
-            ToolTip="Descifra el texto" Margin="220,214.6,0,0" RenderTransformOrigin="0.856,0.962" Click="BtnDescifrar_Click">
+            ToolTip="Descifra el texto" Margin="371,235.6,0,0" RenderTransformOrigin="0.856,0.962" Click="BtnDescifrar_Click">
             <TextBlock
                 Text="Descifrar" />
         </Button>
 
         <Grid
             Background="Transparent"
-            Grid.Row="1"
-            Grid.Column="1" Margin="50,31.6,365.6,158"
+            Grid.Row="1" Margin="50,60.6,485.6,202"
             >
             <StackPanel Orientation="Vertical" Width="auto">
                 <!--<CheckBox
@@ -81,17 +79,21 @@
     AcceptsReturn="False"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
-    materialDesign:HintAssist.Hint="Ingresa un exto"
+    materialDesign:HintAssist.Hint="Ingresa un exto" PreviewKeyDown="TxtNormal_PreviewKeyDown" PreviewKeyUp="TxtNormal_PreviewKeyUp"
     />
             </StackPanel>
         </Grid>
 
         <Grid
-            Background="Transparent"
-            Grid.Column="1" Margin="367.6,9.6,45.6,158" Grid.Row="1"
+            Background="Transparent" Margin="391,36.6,106.6,186" Grid.Row="1"
             >
-            <StackPanel Orientation="Vertical" Width="auto">
+            <StackPanel 
+                
+                VerticalAlignment="Stretch" 
+                        Orientation="Vertical" 
+                        Width="auto">
                 <CheckBox
+                    Margin="0,0,0,5"
     x:Name="MaterialDesignOutlinedTextBoxEnabledComboBox"
     Content="Enabled"
                  
@@ -112,12 +114,14 @@
             </StackPanel>
         </Grid>
         <Label 
+            FontSize="16"
+            Foreground="WhiteSmoke"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Width="auto"
+            Width="525"
             Height="25"
-            Grid.Column="1"
-            Content="Para descifrar copia el texto cifrado en el cuadro de texto de a izquierda!" Margin="124,15,142.6,10.4"/>
+            Content="Para descifrar copia el texto cifrado en el cuadro de texto de la derecha!" 
+            Margin="136,15,132.6,10.4"/>
     </Grid>
 
 </Window>
