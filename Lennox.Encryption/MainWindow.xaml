@@ -1,0 +1,123 @@
+﻿<Window x:Class="Lennox.Encryption.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lennox.Encryption"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         Background="{DynamicResource MaterialDesignPaper}"
+         FontFamily="{DynamicResource MaterialDesignFont}"
+        >
+    <Grid
+    
+        >
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+        <Button 
+                Grid.Column="1"
+                Grid.Row="1"
+                x:Name="BtnCifrar"
+                Background="CadetBlue"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="100"
+                BorderBrush="Transparent"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="15"
+                ToolTip="Cifra el texto " Margin="86,214.6,0,0" Click="BtnCifrar_Click">
+            <TextBlock
+                  Text="Cifrar" />
+        </Button>
+        <Button 
+            Grid.Column="1"
+            Grid.Row="1"
+            x:Name="BtnDescifrar"
+            Background="CadetBlue"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="100"
+            BorderBrush="Transparent"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            materialDesign:ButtonAssist.CornerRadius="15"
+            ToolTip="Descifra el texto" Margin="220,214.6,0,0" RenderTransformOrigin="0.856,0.962" Click="BtnDescifrar_Click">
+            <TextBlock
+                Text="Descifrar" />
+        </Button>
+
+        <Grid
+            Background="Transparent"
+            Grid.Row="1"
+            Grid.Column="1" Margin="50,31.6,365.6,158"
+            >
+            <StackPanel Orientation="Vertical" Width="auto">
+                <!--<CheckBox
+    x:Name="MaterialDesignOutlinedTextBoxEnabledComboBox"
+    Content="Enabled" 
+    Foreground="White"
+                    />-->
+                <TextBox
+                    x:Name="TxtNormal"
+                    Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+   
+    VerticalAlignment="Top"
+    Height="100"
+    Width="auto"
+    AcceptsReturn="False"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto"
+    materialDesign:HintAssist.Hint="Ingresa un exto"
+    />
+            </StackPanel>
+        </Grid>
+
+        <Grid
+            Background="Transparent"
+            Grid.Column="1" Margin="367.6,9.6,45.6,158" Grid.Row="1"
+            >
+            <StackPanel Orientation="Vertical" Width="auto">
+                <CheckBox
+    x:Name="MaterialDesignOutlinedTextBoxEnabledComboBox"
+    Content="Enabled"
+                 
+                    />
+                <TextBox
+
+       x:Name="TxtCifrado"
+    Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+  
+    VerticalAlignment="Top"
+    Height="100"
+    Width="auto"
+    AcceptsReturn="False"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto"
+    materialDesign:HintAssist.Hint="Texto cifrado"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}" />
+            </StackPanel>
+        </Grid>
+        <Label 
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Width="auto"
+            Height="25"
+            Grid.Column="1"
+            Content="Para descifrar copia el texto cifrado en el cuadro de texto de a izquierda!" Margin="124,15,142.6,10.4"/>
+    </Grid>
+
+</Window>
