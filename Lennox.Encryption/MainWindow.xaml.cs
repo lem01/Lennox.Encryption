@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace Lennox.Encryption
     {
         int[] abecedario1 = new int[100];
         int[] abecedario2 = new int[100];
+        ArrayList listletters = new ArrayList();
         public MainWindow()
         {
             InitializeComponent();
@@ -57,16 +59,16 @@ namespace Lennox.Encryption
             //MessageBox.Show(abecedario1.Length + "\n" + abecedario2.Length);
         }
     
-        int LetterLength(string texto) 
-        {
-            int letterLength = 0;
-            for (int i = 0; i < texto.Length; i++)  
-                if (texto[i] != ' ' && texto[i] != '\n')
-                    letterLength++;
+        //int LetterLength(string texto) 
+        //{
+        //    int letterLength = 0;
+        //    for (int i = 0; i < texto.Length; i++)  
+        //        if (texto[i] != ' ' && texto[i] != '\n')
+        //            letterLength++;
 
-            MessageBox.Show(letterLength.ToString());
-            return letterLength;
-        }
+        //    MessageBox.Show(letterLength.ToString());
+        //    return letterLength;
+        //}
 
         bool Valida_Par_InPar(int i) 
         {
@@ -82,20 +84,28 @@ namespace Lennox.Encryption
         {
             TxtCifrado.Clear();
 
+           
             int y, z;
             string exadecimal;
             int lettertransposition;   
-            string texto = TxtNormal.Text.ToUpper();
+            string textoaux = TxtNormal.Text.ToUpper();
+            string texto = "";
 
-            //tengo que saber la longitud de mi texto en plano
-            int letterLength = LetterLength(texto);
-
-            for (int i = 0; i < TxtNormal.Text.Length; i++)
+            //le quito los espacios y saltos a el texto
+            for(int i = 0; i < TxtNormal.Text.Length; i++) 
             {
-                ///con la longitud valido si la posicion de una letra del texto esta en numero par o impar
-                /// depndiendo si es par hago una fucnion matematica y si es impar aplico otra
+                if(textoaux[i] != ' ' && textoaux[i] != '\n')
+                texto += textoaux[i];
+            }
+            ////tengo que saber la longitud de mi texto en plano
+            //int letterLength = LetterLength(texto);
+
+            for (int i = 0; i < texto.Length; i++)
+            {
+                ///con la i del for valido si la posicion de una letra del texto esta en numero par o impar
+                ///en otras palabras si me sale la i par
+                ///aplico una fucnion matematica y si es impar aplico otra
                 if (Valida_Par_InPar(i))
-                if (texto[i] != ' ' && texto[i] != '\n') 
                 {
                     char aux = texto[i];
                     int x = (int)aux;
@@ -112,7 +122,7 @@ namespace Lennox.Encryption
 
                     TxtCifrado.Text += exadecimal + " ";
                 }
-                else if (texto[i] != ' ' && texto[i] != '\n') 
+                else
                 {
                     char aux = texto[i];
                     int x = (int)aux;
@@ -129,6 +139,7 @@ namespace Lennox.Encryption
 
                     TxtCifrado.Text += exadecimal + " ";
                 }
+            
             
             }
 
