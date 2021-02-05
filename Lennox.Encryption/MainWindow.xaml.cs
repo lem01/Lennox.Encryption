@@ -56,6 +56,27 @@ namespace Lennox.Encryption
 
             //MessageBox.Show(abecedario1.Length + "\n" + abecedario2.Length);
         }
+    
+        int LetterLength(string texto) 
+        {
+            int letterLength = 0;
+            for (int i = 0; i < texto.Length; i++)  
+                if (texto[i] != ' ' && texto[i] != '\n')
+                    letterLength++;
+
+            MessageBox.Show(letterLength.ToString());
+            return letterLength;
+        }
+
+        bool Valida_Par_InPar(int i) 
+        {
+            if (i % 2 == 0)
+                return true;
+            else
+                return false;
+        }
+
+
 
         void Cifrar()
         {
@@ -63,16 +84,17 @@ namespace Lennox.Encryption
 
             int y, z;
             string exadecimal;
-            int lettertransposition;
-
-            //string caracter = TextCifrar.Text;
-            // int a = Convert.ToChar(caracter);
-            // MessageBox.Show(a.ToString());
+            int lettertransposition;   
             string texto = TxtNormal.Text.ToUpper();
+
+            //tengo que saber la longitud de mi texto en plano
+            int letterLength = LetterLength(texto);
 
             for (int i = 0; i < TxtNormal.Text.Length; i++)
             {
-                //MessageBox.Show(texto[i].ToString());
+                ///con la longitud valido si la posicion de una letra del texto esta en numero par o impar
+                /// depndiendo si es par hago una fucnion matematica y si es impar aplico otra
+                if (Valida_Par_InPar(i))
                 if (texto[i] != ' ' && texto[i] != '\n') 
                 {
                     char aux = texto[i];
@@ -90,17 +112,25 @@ namespace Lennox.Encryption
 
                     TxtCifrado.Text += exadecimal + " ";
                 }
-                //MessageBox.Show(exadecimal);
+                else if (texto[i] != ' ' && texto[i] != '\n') 
+                {
+                    char aux = texto[i];
+                    int x = (int)aux;
+                    y = (x + 20);
+                    z = (x * 2);
 
-                //EtCifrado.Text += (char)x;
-                ////MessageBox.Show(TxtCifrado.Text.Length.ToString());
+                    x += (y + z);
 
-                //a += (char)x;
+                    x = (x / 4);
 
-                //MessageBox.Show(a);
+                    lettertransposition = TranspositionEncrypt(x);
+
+                    exadecimal = ConverToExadecimal(lettertransposition);
+
+                    TxtCifrado.Text += exadecimal + " ";
+                }
+            
             }
-
-            //MessageBox.Show(TxtCifrado.Text.Length.ToString());
 
         }
 
