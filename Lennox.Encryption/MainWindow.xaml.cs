@@ -28,7 +28,35 @@ namespace Lennox.Encryption
             CargaAbecedario();
         }
         //funciones
-        //funcion cifrar
+        void CargaAbecedario()
+        {
+            int j = 0;
+            //guardando primer abecedario
+            for (int i = 140; i <= 190; i++)
+            {
+                abecedario1[j] = i;
+                j++;
+            }
+
+            j = 0;
+
+            //guardando segundo avecedario
+            for (int i = 166; i <= 190; i++)
+            {
+                abecedario2[j] = i;
+                j++;
+            }
+            //j = 24;
+            for (int i = 140; i <= 165; i++)
+            {
+                abecedario2[j] = i;
+                j++;
+            }
+
+
+            //MessageBox.Show(abecedario1.Length + "\n" + abecedario2.Length);
+        }
+
         void Cifrar()
         {
             TxtCifrado.Clear();
@@ -74,35 +102,6 @@ namespace Lennox.Encryption
 
             //MessageBox.Show(TxtCifrado.Text.Length.ToString());
 
-        }
-
-        void CargaAbecedario()
-        {
-            int j = 0;
-            //guardando primer abecedario
-            for (int i = 140; i <= 190; i++)
-            {
-                abecedario1[j] = i;
-                j++;
-            }
-
-            j = 0;
-
-            //guardando segundo avecedario
-            for (int i = 166; i <= 190; i++)
-            {
-                abecedario2[j] = i;
-                j++;
-            }
-            //j = 24;
-            for (int i = 140; i <= 165; i++)
-            {
-                abecedario2[j] = i;
-                j++;
-            }
-
-
-            //MessageBox.Show(abecedario1.Length + "\n" + abecedario2.Length);
         }
 
         int TranspositionEncrypt(int ascii)
