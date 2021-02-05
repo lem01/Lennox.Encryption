@@ -16,52 +16,66 @@
          Background="{DynamicResource MaterialDesignDarkBackground}"
          FontFamily="{DynamicResource MaterialDesignFont}"
         >
-    <Grid
-    
-        >
+    <Grid>
 
         <Grid.ColumnDefinitions>
 
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="45"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <materialDesign:Card
+  Background="#03a9f4"
+  Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+  Padding="0"
+            >
+            <Grid>
+                <TextBlock 
+            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Para descifrar copia el texto cifrado en el cuadro de texto de la derecha!" 
+          
+            />
 
+            </Grid>
+
+        </materialDesign:Card>
         <Button
                 Grid.Row="1"
                 x:Name="BtnCifrar"
-                Background="CadetBlue"
+                Background="#03a9f4"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Width="100"
                 BorderBrush="Transparent"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="15"
-                ToolTip="Cifra el texto " Margin="237,235.6,0,0" Click="BtnCifrar_Click">
+                ToolTip="Cifra el texto " Margin="237,253,0,0" Click="BtnCifrar_Click">
             <TextBlock
                   Text="Cifrar" />
         </Button>
         <Button
             Grid.Row="1"
             x:Name="BtnDescifrar"
-            Background="CadetBlue"
+            Background="#03a9f4"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Width="100"
             BorderBrush="Transparent"
             Style="{StaticResource MaterialDesignRaisedDarkButton}"
             materialDesign:ButtonAssist.CornerRadius="15"
-            ToolTip="Descifra el texto" Margin="371,235.6,0,0" RenderTransformOrigin="0.856,0.962" Click="BtnDescifrar_Click">
+            ToolTip="Descifra el texto" Margin="371,253,0,0" RenderTransformOrigin="0.856,0.962" Click="BtnDescifrar_Click">
             <TextBlock
                 Text="Descifrar" />
         </Button>
 
         <Grid
             Background="Transparent"
-            Grid.Row="1" Margin="50,60.6,485.6,202"
+            Grid.Row="1" Margin="50,78,485.6,185"
             >
             <StackPanel Orientation="Vertical" Width="auto">
                 <!--<CheckBox
@@ -85,7 +99,7 @@
         </Grid>
 
         <Grid
-            Background="Transparent" Margin="391,36.6,106.6,186" Grid.Row="1"
+            Background="Transparent" Margin="391,54,106.6,169" Grid.Row="1"
             >
             <StackPanel 
                 
@@ -113,15 +127,7 @@
     IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}" />
             </StackPanel>
         </Grid>
-        <Label 
-            FontSize="16"
-            Foreground="WhiteSmoke"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Width="525"
-            Height="25"
-            Content="Para descifrar copia el texto cifrado en el cuadro de texto de la derecha!" 
-            Margin="136,15,132.6,10.4"/>
+
     </Grid>
 
 </Window>

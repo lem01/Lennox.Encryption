@@ -23,7 +23,7 @@ namespace Lennox.Encryption
     {
         int[] abecedario1 = new int[150];
         int[] abecedario2 = new int[150];
-        ArrayList listletters = new ArrayList();
+        //ArrayList listletters = new ArrayList();
         public MainWindow()
         {
             InitializeComponent();
@@ -78,7 +78,6 @@ namespace Lennox.Encryption
             else
                 return false;
         }
-
 
 
         void Cifrar()
@@ -217,20 +216,22 @@ namespace Lennox.Encryption
             TxtCifrado.Clear();
             string letter = TxtNormal.Text;
             string exadecimal = "";
-            int numdecimal = 0,convertToPlainText = 0;
+            int numdecimal = 0,convertToPlainText = 0, count = 0;
             for (int i = 0; i < letter.Length;i++)
             {
                 if(letter[i] != ' ')
                 exadecimal += letter[i];
                 
-                if(letter[i] == ' ' || exadecimal.Length == letter.Length || exadecimal.Length == 2)
-                {
+                //if(letter[i] == ' ' || exadecimal.Length == letter.Length || exadecimal.Length == 2)
+                if(exadecimal.Length == 2)
+                    {
                     numdecimal = ConvertToDecimal(exadecimal);
                     exadecimal = "";                    
 
                     convertToPlainText = TranspositionDecrypt(numdecimal);
 
-                    TxtCifrado.Text += ConvertToPlainText(convertToPlainText); 
+                    TxtCifrado.Text += ConvertToPlainText(convertToPlainText , count);
+                    count++;
                     //MessageBox.Show(PlainPext.ToString());
                     //TxtCifrado += formulaDecrypt(numdecimal);
                     //MessageBox.Show(lettertransposition.ToString());
@@ -297,9 +298,11 @@ namespace Lennox.Encryption
             return resultado;
         }
 
-        string ConvertToPlainText(int x) 
+        string ConvertToPlainText(int x, int count) 
         {
+            if(Valida_Par_InPar(count))
             x = (x / 2) - 5;
+            else x = x - 5;
 
             //convierto numero ascci a caracter
             string planintext  = "";
