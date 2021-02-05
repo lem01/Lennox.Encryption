@@ -21,8 +21,8 @@ namespace Lennox.Encryption
     /// </summary>
     public partial class MainWindow : Window
     {
-        int[] abecedario1 = new int[100];
-        int[] abecedario2 = new int[100];
+        int[] abecedario1 = new int[150];
+        int[] abecedario2 = new int[150];
         ArrayList listletters = new ArrayList();
         public MainWindow()
         {
@@ -32,24 +32,25 @@ namespace Lennox.Encryption
         //funciones
         void CargaAbecedario()
         {
+           
             int j = 0;
             //guardando primer abecedario
-            for (int i = 140; i <= 190; i++)
+            for (int i = 70; i <= 190; i++)
             {
                 abecedario1[j] = i;
                 j++;
             }
-
+            //MessageBox.Show(j.ToString());
             j = 0;
 
             //guardando segundo avecedario
-            for (int i = 166; i <= 190; i++)
+            for (int i = 131; i <= 190; i++)
             {
                 abecedario2[j] = i;
                 j++;
             }
             //j = 24;
-            for (int i = 140; i <= 165; i++)
+            for (int i = 70; i <= 130; i++)
             {
                 abecedario2[j] = i;
                 j++;
@@ -108,7 +109,7 @@ namespace Lennox.Encryption
                 if (Valida_Par_InPar(i))
                 {
                     char aux = texto[i];
-                    int x = (int)aux;
+                    int x = aux;
                     y = (x + 20);
                     z = (x * 2);
 
@@ -121,11 +122,13 @@ namespace Lennox.Encryption
                     exadecimal = ConverToExadecimal(lettertransposition);
 
                     TxtCifrado.Text += exadecimal + " ";
+
+                    //MessageBox.Show(exadecimal.ToString());
                 }
                 else
                 {
                     char aux = texto[i];
-                    int x = (int)aux;
+                    int x = aux;
                     y = (x + 20);
                     z = (x * 2);
 
@@ -138,11 +141,12 @@ namespace Lennox.Encryption
                     exadecimal = ConverToExadecimal(lettertransposition);
 
                     TxtCifrado.Text += exadecimal + " ";
-                }
-            
-            
-            }
+                    //MessageBox.Show(exadecimal.ToString());
 
+                }
+
+            }
+            //MessageBox.Show();
         }
 
         int TranspositionEncrypt(int ascii)
@@ -157,7 +161,7 @@ namespace Lennox.Encryption
 
             int a;
             int resultado = 0;
-            for (int i = 0; i <= 50; i++)
+            for (int i = 0; i <= 120; i++)
             {
                 a = abecedario1[i];
                 if (ascii == abecedario1[i])
@@ -282,7 +286,7 @@ namespace Lennox.Encryption
 
             int a;
             int resultado = 0;
-            for (int i = 0; i <= 50; i++)
+            for (int i = 0; i <= 120; i++)
             {
                 a = abecedario2[i];
                 if (numdecimal == abecedario2[i])
