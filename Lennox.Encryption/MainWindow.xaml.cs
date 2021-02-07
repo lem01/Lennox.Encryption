@@ -21,9 +21,11 @@ namespace Lennox.Encryption
     /// </summary>
     public partial class MainWindow : Window
     {
+        //creamos estas 2 variables que seran nuestro abecedario
+        //nos ayudaran para la permutacion de caracteres
         int[] abecedario1 = new int[150];
         int[] abecedario2 = new int[150];
-        //ArrayList listletters = new ArrayList();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -40,7 +42,7 @@ namespace Lennox.Encryption
                 abecedario1[j] = i;
                 j++;
             }
-            //MessageBox.Show(j.ToString());
+
             j = 0;
 
             //guardando segundo avecedario
@@ -55,23 +57,9 @@ namespace Lennox.Encryption
                 abecedario2[j] = i;
                 j++;
             }
-
-
-            //MessageBox.Show(abecedario1.Length + "\n" + abecedario2.Length);
         }
-    
-        //int LetterLength(string texto) 
-        //{
-        //    int letterLength = 0;
-        //    for (int i = 0; i < texto.Length; i++)  
-        //        if (texto[i] != ' ' && texto[i] != '\n')
-        //            letterLength++;
 
-        //    MessageBox.Show(letterLength.ToString());
-        //    return letterLength;
-        //}
-
-        bool Valida_Par_InPar(int i) 
+        bool Valida_Par_Impar(int i) 
         {
             if (i % 2 == 0)
                 return true;
@@ -83,8 +71,7 @@ namespace Lennox.Encryption
         void Cifrar()
         {
             TxtCifrado.Clear();
-
-           
+    
             int y, z;
             string exadecimal;
             int lettertransposition;   
@@ -97,15 +84,13 @@ namespace Lennox.Encryption
                 if(textoaux[i] != ' ' && textoaux[i] != '\n')
                 texto += textoaux[i];
             }
-            ////tengo que saber la longitud de mi texto en plano
-            //int letterLength = LetterLength(texto);
 
             for (int i = 0; i < texto.Length; i++)
             {
                 ///con la i del for valido si la posicion de una letra del texto esta en numero par o impar
                 ///en otras palabras si me sale la i par
                 ///aplico una fucnion matematica y si es impar aplico otra
-                if (Valida_Par_InPar(i))
+                if (Valida_Par_Impar(i))
                 {
                     char aux = texto[i];
                     int x = aux;
@@ -122,7 +107,7 @@ namespace Lennox.Encryption
 
                     TxtCifrado.Text += exadecimal + " ";
 
-                    //MessageBox.Show(exadecimal.ToString());
+
                 }
                 else
                 {
@@ -140,31 +125,25 @@ namespace Lennox.Encryption
                     exadecimal = ConverToExadecimal(lettertransposition);
 
                     TxtCifrado.Text += exadecimal + " ";
-                    //MessageBox.Show(exadecimal.ToString());
+
 
                 }
 
             }
-            //MessageBox.Show();
+ 
         }
 
-        int TranspositionEncrypt(int ascii)
+        int TranspositionEncrypt(int acssi)
         {
-            //string n = "";
-            //MessageBox.Show(n.Length.ToString());
-            //for (int i = 0; i < abecedario1.Length; i++) 
-            //{
-            //    n += abecedario2[i].ToString() + "--";
-            //}
-            //MessageBox.Show(n);
-
-            int a;
             int resultado = 0;
             for (int i = 0; i <= 120; i++)
             {
-                a = abecedario1[i];
-                if (ascii == abecedario1[i])
+                if (acssi == abecedario1[i])
+                {
                     resultado = abecedario2[i];
+                    break;
+                }
+                    
             }
 
             return resultado;
@@ -222,7 +201,7 @@ namespace Lennox.Encryption
                 if(letter[i] != ' ')
                 exadecimal += letter[i];
                 
-                //if(letter[i] == ' ' || exadecimal.Length == letter.Length || exadecimal.Length == 2)
+
                 if(exadecimal.Length == 2)
                     {
                     numdecimal = ConvertToDecimal(exadecimal);
@@ -232,9 +211,6 @@ namespace Lennox.Encryption
 
                     TxtCifrado.Text += ConvertToPlainText(convertToPlainText , count);
                     count++;
-                    //MessageBox.Show(PlainPext.ToString());
-                    //TxtCifrado += formulaDecrypt(numdecimal);
-                    //MessageBox.Show(lettertransposition.ToString());
                 }
             }
         }
@@ -284,23 +260,23 @@ namespace Lennox.Encryption
         
         int TranspositionDecrypt( int numdecimal) 
         {
-
-            int a;
             int resultado = 0;
             for (int i = 0; i <= 120; i++)
             {
-                a = abecedario2[i];
                 if (numdecimal == abecedario2[i])
+                {
                     resultado = abecedario1[i];
+                    break;
+                }
+               
             }
 
-            //MessageBox.Show(resultado.ToString());
             return resultado;
         }
 
         string ConvertToPlainText(int x, int count) 
         {
-            if(Valida_Par_InPar(count))
+            if(Valida_Par_Impar(count))
             x = (x / 2) - 5;
             else x = x - 5;
 
